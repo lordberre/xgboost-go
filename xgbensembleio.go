@@ -11,8 +11,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/Elvenson/xgboost-go/activation"
-	"github.com/Elvenson/xgboost-go/inference"
+	"github.com/lordberre/xgboost-go/activation"
+	"github.com/lordberre/xgboost-go/inference"
 )
 
 type xgboostJSON struct {

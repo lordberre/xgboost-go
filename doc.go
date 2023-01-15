@@ -42,9 +42,9 @@ Here is how to load the model exported from the above script:
 	import (
 		"fmt"
 
-		"github.com/Elvenson/xgboost-go/activation"
-		"github.com/Elvenson/xgboost-go/mat"
-		"github.com/Elvenson/xgboost-go/models"
+		"github.com/lordberre/xgboost-go/activation"
+		"github.com/lordberre/xgboost-go/mat"
+		"github.com/lordberre/xgboost-go/models"
 	)
 
 	func main() {

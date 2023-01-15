@@ -1,5 +1,5 @@
-github.com/Elvenson/xgboost-go v0.1.2 h1:l6iD13MNuW20M3m0InVo6jnAdfuP29dUQNC/zRTV3N0=
-github.com/Elvenson/xgboost-go v0.1.2/go.mod h1:h0WG7DaMS+IRywLJJG/KSgvP7smtqKwNihyD2ye9uOo=
+github.com/lordberre/xgboost-go v0.1.2 h1:l6iD13MNuW20M3m0InVo6jnAdfuP29dUQNC/zRTV3N0=
+github.com/lordberre/xgboost-go v0.1.2/go.mod h1:h0WG7DaMS+IRywLJJG/KSgvP7smtqKwNihyD2ye9uOo=
 github.com/golang/protobuf v1.4.0-rc.1/go.mod h1:ceaxUfeHdC40wWswd/P6IGgMaK3YpKi5j83Wpe3EHw8=
 github.com/golang/protobuf v1.4.0-rc.1.0.20200221234624-67d41d38c208/go.mod h1:xKAWHe0F5eneWXFV3EuXVDTCmh+JuBKY0li0aMyXATA=
 github.com/golang/protobuf v1.4.0-rc.2/go.mod h1:LlEzMj4AhA7rCAGe4KMBDvJI+AwstrUpVNzEA03Pprs=

@@ -1,7 +1,7 @@
 # xgboost-go
 
 [![Build Status](https://travis-ci.com/Elvenson/xgboost-go.svg?token=rzHXU1xSU77dfjTLof6x&branch=main)](https://travis-ci.com/github/Elvenson/xgboost-go)
-[![GoDoc](https://godoc.org/github.com/Elvenson/xgboost-go?status.png)](https://godoc.org/github.com/Elvenson/xgboost-go)
+[![GoDoc](https://godoc.org/github.com/lordberre/xgboost-go?status.png)](https://godoc.org/github.com/lordberre/xgboost-go)
 
 XGBoost inference with Golang by means of exporting xgboost model into json format and load model from that json file. 
 This repo only supports [DMLC XGBoost](https://github.com/dmlc/xgboost) model at the moment.
@@ -21,7 +21,7 @@ Currently, this repo only supports a few core features such as:
 ## How to use:
 To use this repo, first you need to get it:
 ```shell script
-go get github.com/Elvenson/xgboost-go
+go get github.com/lordberre/xgboost-go
 ```
 
 Basic example:
@@ -32,9 +32,9 @@ package main
 import (
 	"fmt"
 
-	xgb "github.com/Elvenson/xgboost-go"
-	"github.com/Elvenson/xgboost-go/activation"
-	"github.com/Elvenson/xgboost-go/mat"
+	xgb "github.com/lordberre/xgboost-go"
+	"github.com/lordberre/xgboost-go/activation"
+	"github.com/lordberre/xgboost-go/mat"
 )
 
 func main() {
@@ -64,6 +64,6 @@ Here `LoadXGBoostFromJSON` requires 5 parameters:
 * Activation function, for now binary is `Logistic` multiclass is `Softmax` and regression is `Raw`.
 
 For more example, can take a look at `xgbensemble_test.go` or read this package
-[documentation](https://godoc.org/github.com/Elvenson/xgboost-go).
+[documentation](https://godoc.org/github.com/lordberre/xgboost-go).
 
 **NOTE**: This repo only got tested on Python `xgboost` package version `1.2.0`.
