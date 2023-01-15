@@ -172,3 +172,31 @@ func IsEqualMatrices(m1, m2 *Matrix, threshold float64) error {
 	}
 	return nil
 }
+
+// Returns the RSME of the difference between two vectors.
+func GetVectorRMSE(v1, v2 *Vector) (float64, error) {
+	if len(*v1) != len(*v2) {
+		return 0, fmt.Errorf("different vector length v1=%d, v2=%d", len(*v1), len(*v2))
+	}
+	sum := 0.0
+	for i := range *v1 {
+		sum += math.Pow((*v1)[i]-(*v2)[i], 2)
+	}
+	return math.Sqrt(sum / float64(len(*v1))), nil
+}
+
+// Returns the RSME of the difference between two Matrix objects.
+func GetMatrixRMSE(m1, m2 *Matrix) (float64, error) {
+	if len(m1.Vectors) != len(m2.Vectors) {
+		return 0, fmt.Errorf("row  matrix mismatch: m1 got %d rows, m2 got %d rows", len(m1.Vectors), len(m2.Vectors))
+	}
+	sum := 0.0
+	for i := range m1.Vectors {
+		rmse, err := GetVectorRMSE(m1.Vectors[i], m2.Vectors[i])
+		if err != nil {
+			return 0, errors.Wrap(err, fmt.Sprintf("matrix comparison at index %d", i))
+		}
+		sum += rmse
+	}
+	return sum / float64(len(m1.Vectors)), nil
+}
