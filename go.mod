@@ -1,4 +1,4 @@
-module github.com/Elvenson/xgboost-go
+module github.com/lordberre/xgboost-go
 
 go 1.14
 
