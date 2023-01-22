@@ -28,6 +28,50 @@ type Matrix struct {
 	Vectors []*Vector
 }
 
+// Converts a SparseMatrix to a slice of float64
+func (m SparseMatrix) ToFloat64() [][]float64 {
+	result := make([][]float64, len(m.Vectors))
+	for i, v := range m.Vectors {
+		result[i] = make([]float64, 0)
+		for _, val := range v {
+			result[i] = append(result[i], val)
+		}
+	}
+	return result
+}
+
+// Converts a Matrix to a slice of float64
+func (m Matrix) ToFloat64() [][]float64 {
+	result := make([][]float64, len(m.Vectors))
+	for i, v := range m.Vectors {
+		result[i] = make([]float64, len(*v))
+		for j, val := range *v {
+			result[i][j] = val
+		}
+	}
+	return result
+}
+
+// Flatten 1D mattrix to slice of float64
+func (m Matrix) Flatten() []float64 {
+	result := make([]float64, 0)
+	for _, v := range m.Vectors {
+		result = append(result, *v...)
+	}
+	return result
+}
+
+// Flatten 1D mattrix to slice of float64
+func (m SparseMatrix) Flatten() []float64 {
+	result := make([]float64, 0)
+	for _, v := range m.Vectors {
+		for _, val := range v {
+			result = append(result, val)
+		}
+	}
+	return result
+}
+
 // ReadLibsvmFileToSparseMatrix reads libsvm file into sparse matrix.
 func ReadLibsvmFileToSparseMatrix(fileName string) (SparseMatrix, error) {
 	file, err := os.Open(fileName)
@@ -75,6 +119,21 @@ func ReadLibsvmFileToSparseMatrix(fileName string) (SparseMatrix, error) {
 				return SparseMatrix{}, fmt.Errorf("cannot parse to float %s: %s", pair[1], err)
 			}
 			vec[int(colIdx)] = val
+		}
+		sparseMatrix.Vectors = append(sparseMatrix.Vectors, vec)
+	}
+	return sparseMatrix, nil
+}
+
+// GetSparseMatrixFromSlice creates sparse matrix from float64 slice.
+func GetSparseMatrixFromSlice(data [][]float64) (SparseMatrix, error) {
+	sparseMatrix := SparseMatrix{Vectors: make([]SparseVector, 0)}
+	for i := 0; i < len(data); i++ {
+		vec := SparseVector{}
+		for j := 0; j < len(data[i]); j++ {
+			if data[i][j] != 0 {
+				vec[j] = data[i][j]
+			}
 		}
 		sparseMatrix.Vectors = append(sparseMatrix.Vectors, vec)
 	}
@@ -199,4 +258,23 @@ func GetMatrixRMSE(m1, m2 *Matrix) (float64, error) {
 		sum += rmse
 	}
 	return sum / float64(len(m1.Vectors)), nil
+}
+
+// Write all elements of Matrix to a file
+func WriteMatrixToFile(m *Matrix, fileName string) error {
+	f, err := os.Create(fileName)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	for _, v := range m.Vectors {
+		for _, i := range *v {
+			_, err := fmt.Fprintln(f, i)
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
 }
